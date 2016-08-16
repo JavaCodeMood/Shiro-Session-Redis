@@ -1,0 +1,45 @@
+language: java
+sudo: required
+
+# required for oraclejdk9
+dist: trusty
+
+# required for oraclejdk9
+group: edge
+
+os:
+  - linux
+
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+
+matrix:
+  allow_failures:
+    - jdk: oraclejdk9
+
+before_install:
+- chmod +x gradlew
+
+install:
+  # Update Gradle Wrapper instead of letting Travis execute './gradlew assemble' by default
+- ./gradlew wrapper --gradle-distribution-url=https://services.gradle.org/distributions-snapshots/gradle-3.1-20160816000046+0000-all.zip
+- /bin/true
+
+script:
+- java -version
+- ./gradlew -version
+- ./gradlew assemble
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
+after_success:
+notifications:
+  email:

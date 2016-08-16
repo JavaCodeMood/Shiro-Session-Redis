@@ -1,0 +1,128 @@
+group 'com.github.izhangzhihao'
+version '1.0-SNAPSHOT'
+
+apply plugin: "java"
+apply plugin: "war"
+apply plugin: "jacoco"
+apply plugin: "idea"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+def SpringVersion = "4.3.1.RELEASE"
+def SpringBootVersion = "1.4.0.RELEASE"
+def HibernateVersion = "5.2.1.Final"
+def ShiroVersion = "1.2.6"
+def JacksonVersion = "2.8.1"
+
+
+repositories {
+    mavenLocal()
+    //内网nexus私服地址
+    //maven { url "http://10.16.155.241:8080/nexus/content/repositories/central/" }
+    //外网nexus私服地址
+    maven { url "http://210.31.198.175:8080/nexus/content/repositories/central/" }
+    jcenter();
+    maven { url "http://maven.oschina.net/content/groups/public/" }
+    mavenCentral()
+    maven { url "http://repo.spring.io/release" }
+    maven { url "https://repo.spring.io/libs-snapshot" }
+}
+
+dependencies {
+    compile(
+            // spring framework
+            "org.springframework:spring-context:${SpringVersion}",
+            "org.springframework:spring-context-support:${SpringVersion}",//启用ehcache缓存
+            "org.springframework:spring-web:${SpringVersion}",
+            "org.springframework:spring-webmvc:${SpringVersion}",
+            "org.springframework:spring-test:${SpringVersion}",
+            "org.springframework:spring-beans:${SpringVersion}",
+            "org.springframework:spring-expression:${SpringVersion}",
+            "org.springframework:spring-aop:${SpringVersion}",
+            "org.springframework:spring-aspects:${SpringVersion}",
+            "org.springframework:spring-core:${SpringVersion}",
+            "org.springframework:spring-instrument:${SpringVersion}",
+            "org.springframework:spring-orm:${SpringVersion}",
+
+            //Spring-Session
+            "org.springframework.session:spring-session:1.2.1.RELEASE",
+            "org.springframework.data:spring-data-redis:1.7.2.RELEASE",
+
+            //jedis
+            "redis.clients:jedis:2.9.0",
+            "org.apache.commons:commons-pool2:2.4.2",
+
+
+            // JSON
+            "com.fasterxml.jackson.core:jackson-core:${JacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-databind:${JacksonVersion}",
+            "com.fasterxml.jackson.core:jackson-annotations:${JacksonVersion}",
+
+            //@NotNull
+            "org.jetbrains:annotations:15.0",
+
+            //slf4j
+            "org.slf4j:jcl-over-slf4j:1.7.21",
+            "ch.qos.logback:logback-core:1.1.7",
+            "ch.qos.logback:logback-classic:1.1.7",
+
+            //shiro
+            "org.apache.shiro:shiro-core:${ShiroVersion}",
+            "org.apache.shiro:shiro-spring:${ShiroVersion}",
+            "org.apache.shiro:shiro-web:${ShiroVersion}",
+            "org.apache.shiro:shiro-ehcache:${ShiroVersion}",
+
+            //jUnit
+            "junit:junit:4.12",
+
+            //Lombok
+            "org.projectlombok:lombok:1.16.10",
+
+    )
+    testCompile(
+            //jUnit
+            "junit:junit:4.12",
+    )
+}
+
+task copyJars(type: Copy) {
+    from configurations.runtime
+    into "lib" //复制到lib目录
+}
+
+//让gradle支持中文
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+test {
+    useJUnit()
+    // listen to events in the test execution lifecycle
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+
+    // listen to standard out and standard error of the test JVM(s)
+    onOutput { descriptor, event ->
+        logger.lifecycle("Test: " + descriptor + " produced standard out/err: " + event.message)
+    }
+
+    jacoco {
+        destinationFile = file("$buildDir/jacoco/test.exec")
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
+    }
+}
+
+build.dependsOn jacocoTestReport
+
+task integrationTest(type: Test) {
+    include 'test/java/**'
+}
+
