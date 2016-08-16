@@ -1,15 +1,19 @@
 # Shiro-Session-Redis [![Build Status](https://travis-ci.org/izhangzhihao/Shiro-Session-Redis.svg?branch=master)](https://travis-ci.org/izhangzhihao/Shiro-Session-Redis)
 
-    实现将Shiro的session存储在Redis中，并可配置ehcache作为进程内缓存，通过redis消息订阅发布实现session缓存失效
+    实现将Shiro的session存储在Redis中，并可配置ehcache作为进程内缓存，通过redis消息订阅发布实现session缓存失效等
 
 # 主要的后端架构：
 
     Spring + Spring MVC + Apache Shiro + Spring Session + Spring Data Redis + Jedis 
     
-# 所需的环境和正确打开项目的姿势
+# 所需的环境和正确打开项目的姿势 可以参考SpringMVCSeedProject [![Build Status](http://210.31.198.175:8080/jenkins/job/SpringMVCSeedProject/badge/icon)](https://github.com/izhangzhihao/SpringMVCSeedProject)完整配置
 
     运行项目前请确保有一个Redis实例在运行，并且正确配置(src/main/resources/redis.properties)
-    可以参考下面的配置实例，也可以去SpringMVCSeedProject [![Build Status](http://210.31.198.175:8080/jenkins/job/SpringMVCSeedProject/badge/icon)](https://github.com/izhangzhihao/SpringMVCSeedProject)看完整配置
+    可以参考下面的配置实例
+
+# 配置Lombok :
+
+    https://izhangzhihao.github.io/2016/07/29/使用Lombok注解
 
 # Spring-Shiro.xml 主要配置：
 

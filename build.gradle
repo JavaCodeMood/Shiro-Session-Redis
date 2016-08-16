@@ -17,10 +17,6 @@ def JacksonVersion = "2.8.1"
 
 repositories {
     mavenLocal()
-    //内网nexus私服地址
-    //maven { url "http://10.16.155.241:8080/nexus/content/repositories/central/" }
-    //外网nexus私服地址
-    maven { url "http://210.31.198.175:8080/nexus/content/repositories/central/" }
     jcenter();
     maven { url "http://maven.oschina.net/content/groups/public/" }
     mavenCentral()
@@ -124,5 +120,17 @@ build.dependsOn jacocoTestReport
 
 task integrationTest(type: Test) {
     include 'test/java/**'
+}
+
+// In root build.gradle
+allprojects {
+    tasks.withType(JavaCompile) {
+        options.fork = true
+        options.forkOptions.jvmArgs << '-XaddExports:jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED'
+    }
+    tasks.withType(GroovyCompile) {
+        options.fork = true
+        options.forkOptions.jvmArgs << '-XaddExports:jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED'
+    }
 }
 
