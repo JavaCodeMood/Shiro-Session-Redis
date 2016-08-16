@@ -11,16 +11,11 @@ os:
   - linux
 
 jdk:
-  - OpenJDK6
-  - OpenJDK7
-  - oraclejdk7
   - oraclejdk8
   - oraclejdk9
 
 matrix:
   allow_failures:
-    - jdk: oraclejdk6
-    - jdk: oraclejdk7
     - jdk: oraclejdk9
 
 before_install:
