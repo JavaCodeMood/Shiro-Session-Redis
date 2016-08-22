@@ -8,9 +8,8 @@ apply plugin: "idea"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-def SpringVersion = "4.3.1.RELEASE"
+def SpringVersion = "4.3.2.RELEASE"
 def SpringBootVersion = "1.4.0.RELEASE"
-def HibernateVersion = "5.2.1.Final"
 def ShiroVersion = "1.2.6"
 def JacksonVersion = "2.8.1"
 
