@@ -9,10 +9,11 @@ group: edge
 
 os:
   - linux
+  # - osx
 
 jdk:
   - oraclejdk8
-  - oraclejdk9
+  # - oraclejdk9
 
 matrix:
   allow_failures:
