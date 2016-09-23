@@ -8,10 +8,10 @@ apply plugin: "idea"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-def SpringVersion = "4.3.2.RELEASE"
-def SpringBootVersion = "1.4.0.RELEASE"
-def ShiroVersion = "1.2.6"
-def JacksonVersion = "2.8.1"
+def SpringVersion = "4.3.3.RELEASE"
+def SpringBootVersion = "1.4.1.RELEASE"
+def ShiroVersion = "1.3.2"
+def JacksonVersion = "2.8.3"
 
 
 repositories {
@@ -40,8 +40,8 @@ dependencies {
             "org.springframework:spring-orm:${SpringVersion}",
 
             //Spring-Session
-            "org.springframework.session:spring-session:1.2.1.RELEASE",
-            "org.springframework.data:spring-data-redis:1.7.2.RELEASE",
+            "org.springframework.session:spring-session:1.2.2.RELEASE",
+            "org.springframework.data:spring-data-redis:1.7.3.RELEASE",
 
             //jedis
             "redis.clients:jedis:2.9.0",
