@@ -76,8 +76,8 @@ public class ShiroSession extends SimpleSession implements Serializable {
         if (getLastAccessTime() != null) {
             long last = getLastAccessTime().getTime();
             long now = lastAccessTime.getTime();
-            //如果10s内访问 则不更新session,否则需要更新远端过期时间
-            if ((last - now) / 1000 >= 10) {
+            //如果60s内访问 则不更新session,否则需要更新远端过期时间
+            if ((last - now) / 1000 >= 60) {
                 //发送通知
                 //设置为已改变，更新到redis
                 this.setChanged(true);
