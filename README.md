@@ -6,7 +6,7 @@
 
     Spring + Spring MVC + Apache Shiro + Spring Session + Spring Data Redis + Jedis 
     
-# 所需的环境和正确打开项目的姿势 可以参考SpringMVCSeedProject [![Build Status](http://210.31.198.175:8080/jenkins/job/SpringMVCSeedProject/badge/icon)](https://github.com/izhangzhihao/SpringMVCSeedProject)完整配置
+# 所需的环境和正确打开项目的姿势 可以参考SpringMVCSeedProject [![Build Status](https://travis-ci.org/izhangzhihao/SpringMVCSeedProject.svg?branch=master)](https://github.com/izhangzhihao/SpringMVCSeedProject)完整配置
 
     运行项目前请确保有一个Redis实例在运行，并且正确配置(src/main/resources/redis.properties)
     可以参考下面的配置实例
